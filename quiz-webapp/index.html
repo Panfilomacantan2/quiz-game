@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Quiz Web Application | PANFILO</title>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<!-- to start the game -->
+		<!-- <button id="btn-start">Start</button> -->
+
+		<div class="question-section">
+			<!-- header -->
+			<div class="question-header">
+				<div class="logo">QUIZ APP</div>
+				<!-- time -->
+				<div class="time-container">
+					<i class="fa fa-clock-o" aria-hidden="true"></i
+					><span id="timer">15</span>
+				</div>
+				<!-- time-line -->
+			</div>
+			<!-- <div class="line"></div> -->
+			<div class="container">
+				<div class="question-container">
+					<p id="question-text"></p>
+				</div>
+
+				<div id="option-container">
+					<!-- <div class="option">pan</div> -->
+					<!-- <div class="option">lan</div> -->
+					<!-- <div class="option">san</div> -->
+					<!-- <div class="option">wan</div> -->
+				</div>
+				<div class="footer-info">
+				<div class="number-question-container">
+					<span class="current-question-number">0</span>
+					of
+						<span class="question-length">0</span>
+					</div>
+				<button id="next-btn">Next</button>
+				</div>
+				
+				</div>
+			</div>
+
+			<!-- <div class="question-footer"> -->
+			<!-- <div class="logo">QUIZ APP</div> -->
+			<!-- </div> -->
+				
+		</div>
+
+
+		<div class="category-container">
+			<div class="label">CATEGORY</div>
+
+			<div class="category-input">
+				<input type="text"  id="player-name" placeholder="Enter your name">
+				<button id="player-btn">Enter</button>
+			</div>
+               <!-- <button class="category-btn">Person</button> -->
+			   <!-- <button class="category-btn">Things</button> -->
+			   <!-- <button class="category-btn">Earth</button> -->
+		</div>
+
+
+
+  <!-- this is for the result container -->
+      <div class="result-container">
+		  <div class="icon-box">
+			 <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+
+		  </div>
+
+		  <div class="congratulation-message">
+			  <p class="message">Hello 
+				  <span id="players-name"></span>,
+			  <br>You've completed the Quiz! 
+			  <br>
+			  <span id="hide-message">YOU'VE GOT A PERFECT SCORE</span>
+				  Your score is <span id="player-score">0</span> out of <span id="category-question-length">0</span>
+			  </p>
+		  </div>
+
+		  <div class="btn-decision">
+              <button class="quit-btn" onclick="window.location.reload()">Quit</button>
+                <button class="play-again-btn">Play again</button>
+		  </div>
+	  </div>
+        
+
+
+  <!-- this is for the rule container -->
+ <div class="category-rules">
+	 <div class="label">RULES</div>
+		 
+			 <li class="rule-list">1.<span>You can choose 1 category only.</span></li>
+			 <li class="rule-list">2.<span>You will have only 15 seconds per question.</span></li>
+			 <li class="rule-list">3.<span>Once you select your answer, it can't be undone.</span></li>
+			 <li class="rule-list">4.<span>You can't exit from quiz while you're playing.</span></li>
+			 <li class="rule-list">5.<span>You can't select any option once the time is up.</span></li>
+			 <li class="rule-list">6.<span>Don't cheat.</span></li>
+		 </ul>
+	      <button id="btn-start">Start</button>
+ </div>
+
+
+
+<!-- this is for the front page -->
+<section class="front-cover">
+    <!-- progress -->
+	<div class="img-box">
+		<img src="../assets/frontcover.png" alt="front-cover">
+	</div>
+	<div class="progress-container">
+		<div class="progress-bar">
+
+		</div>
+		<span class="loading">0%</span>
+	</div>
+</section>
+
+
+
+
+
+
+
+		<script src="js/questions.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
