@@ -5,16 +5,17 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Quiz Web Application | PANFILO</title>
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-		/>
+		<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
 		<!-- to start the game -->
 		<!-- <button id="btn-start">Start</button> -->
+
+		<!-- harburger menu bar -->
+		<button id="openNav"><i class="fa fa-bars" aria-hidden="true"></i>
+</button>
 
 		<div class="question-section">
 			<!-- header -->
@@ -23,7 +24,7 @@
 				<!-- time -->
 				<div class="time-container">
 					<i class="fa fa-clock-o" aria-hidden="true"></i
-					><span id="timer">15</span>
+					><span id="timer">20</span>
 				</div>
 				<!-- time-line -->
 			</div>
@@ -81,7 +82,7 @@
 
 		  <div class="congratulation-message">
 			  <p class="message">Hello 
-				  <span id="players-name"></span>,
+				  <span class="players-name"></span>,
 			  <br>You've completed the Quiz! 
 			  <br>
 			  <span id="hide-message">YOU'VE GOT A PERFECT SCORE</span>
@@ -90,7 +91,7 @@
 		  </div>
 
 		  <div class="btn-decision">
-              <button class="quit-btn" onclick="window.location.reload()">Quit</button>
+              <button class="quit-btn" id="quit-btn">Quit</button>
                 <button class="play-again-btn">Play again</button>
 		  </div>
 	  </div>
@@ -102,7 +103,7 @@
 	 <div class="label">RULES</div>
 		 
 			 <li class="rule-list">1.<span>You can choose 1 category only.</span></li>
-			 <li class="rule-list">2.<span>You will have only 15 seconds per question.</span></li>
+			 <li class="rule-list">2.<span>You will have only 20 seconds per question.</span></li>
 			 <li class="rule-list">3.<span>Once you select your answer, it can't be undone.</span></li>
 			 <li class="rule-list">4.<span>You can't exit from quiz while you're playing.</span></li>
 			 <li class="rule-list">5.<span>You can't select any option once the time is up.</span></li>
@@ -129,10 +130,76 @@
 
 
 
+     <!-- <select  id="select-level"> -->
+		 <!-- <option value="Easy">Easy</option> -->
+		 <!-- <option value="Medium">Medium</option> -->
+		 <!-- <option value="Hard">Hard</option> -->
+	 <!-- </select> -->
 
 
 
+   <!-- audio for all entire game -->
+  <audio src="http://dight310.byu.edu/media/audio/FreeLoops.com/1/1/Bike%20Bell.wav-21369-Free-Loops.com.mp3" type='audio/mpeg' id="timesUp"></audio>
+  <audio src="../assets/check.mp3" id="check"></audio>
+  <audio src="../assets/wrong.mp3" id="wrong"></audio>
+  <audio src="../assets/playing.mp3" id="playing" loop="true"></audio>
+  <audio src="../assets/choose.mp3" id="choose"></audio>
+  <audio src="../assets/congratulation.mp3" id="congratulation"></audio>
 
+
+
+   <!-- this is for the navigation bar -->
+
+   <div class="nav-container">
+	   <div class="nav-header"> 
+		   <div class="title">Quiz App</div>
+		   <div id="closeNav">
+			   <i class="fa fa-bars" aria-hidden="true"></i>
+
+		   </div>
+       </div>
+		   <div class="img-container">
+			   <img src="../assets/avatarDp.png" alt="avatar" id="user-avatar">
+			   </div>
+			   <div id="players-name" class="avatar">Player</div>
+			   <button id="avatar-btn">Choose avatar</button>
+			   
+		   <!-- list  -->
+		<div class="list">
+			<a href="#"><i class="fa fa-home" aria-hidden="true"></i>
+Home</a>
+			<a href="#"><i class="fa fa-list-alt" aria-hidden="true"></i>
+Category</a>
+			<a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>
+Settings</a>
+			<a href="#"><i class="fa fa-info-circle" aria-hidden="true"></i>
+About</a>
+		</>
+	  
+   </div>
+
+
+   <!-- this is for the user's avatar container -->
+
+   <div class="avatar-container">
+	   <img src="../assets/avatar1.jpg" alt="">
+	   <img src="../assets/avatar2.jpg" alt="">
+	   <img src="../assets/avatar3.jpg" alt="">
+	   <img src="../assets/avatar4.png" alt="">
+	   <img src="../assets/avatar5.jpg" alt="">
+	   <img src="../assets/avatar6.png" alt="">
+	   <img src="../assets/avatar7.jpg" alt="">
+	   <img src="../assets/avatar8..jpg" alt="">
+	   <img src="../assets/avatar10.jpg" alt="">
+	   <img src="../assets/avatar11.jpg" alt="">
+	   <img src="../assets/avatar12.jpg" alt="">
+	   <img src="../assets/avatar13.jpg" alt="">
+	   <img src="../assets/avatar14.jpg" alt="">
+	   <img src="../assets/avatar15.jpg" alt="">
+	   <img src="../assets/avatar16.jpg" alt="">
+   </div>
+
+  
 		<script src="js/questions.js"></script>
 		<script src="js/app.js"></script>
 	</body>

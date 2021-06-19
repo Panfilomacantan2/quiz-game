@@ -1,46 +1,77 @@
 let questionCounter = 0;
 let score = 0;
 let playerNameStored = [];
-let defaultName = 'Player';
+// let playerTimeStored = []
 let questionSection = document.querySelector('.question-section');
-let playerName = document.querySelector('#players-name');
+let playerName = document.querySelector('.players-name');
 let playAgainBtn = document.querySelector('.play-again-btn');
 let startBtn = document.querySelector('#btn-start');
 let nextBtn = document.querySelector('#next-btn');
 let timer = document.querySelector('#timer');
 let line = document.querySelector('.line');
-let categoryQuestionLength = document.querySelector('#category-question-length');
-let currentQuestionNumber = document.querySelector('.number-question-container .current-question-number');
-let questionLength = document.querySelector('.number-question-container .question-length');
+let categoryQuestionLength = document.querySelector(
+	'#category-question-length',
+);
+let currentQuestionNumber = document.querySelector(
+	'.number-question-container .current-question-number',
+);
+let questionLength = document.querySelector(
+	'.number-question-container .question-length',
+);
 let categoryContainer = document.querySelector('.category-container');
 let playerNameInput = document.querySelector('.category-input #player-name');
 let playerBtn = document.querySelector('.category-input #player-btn');
 let gameInterval;
-let timeLeft = 15;
+let timeLeft = 21;
 let correctIcon =
 	'<div class="icon-correct"><i class="fa fa-check-circle" aria-hidden="true"></i></div>';
 let wrongIcon =
 	'<div class="icon-correct"><i class="fa fa-times-circle" aria-hidden="true"></i> </div>';
 
+// window.onload = () => {
+// 	document.querySelector('#playing').play();
+// 	document.querySelector('#playing').currentTime = 0;
+// 	document.querySelector('#playing').volume = 0.5;
+// };
+//THIS IS FOR THE LEVELS
+//  let selectLevel = document.querySelector('#select-level');
 
-	//this is for the player name
+// selectLevel.addEventListener('click', function () {
+// switch (this.value.toUpperCase()) {
+// case 'EASY':
+//
+// playerTimeStored.push(20)
+// console.log("THIS IS EASY PART")
+// console.log(playerTimeStored[0])
+// break;
+// case 'MEDIUM':
+//
+// playerTimeStored.push(15);
+// console.log('THIS IS MEDIUM PART');
+// console.log(playerTimeStored[0]);
+// break;
+// case 'HARD':
+// playerTimeStored.push(10);
+// console.log('THIS IS HARD PART');
+// console.log(playerTimeStored[0]);
+// break;
+// }
+// });
 
 playerBtn.addEventListener('click', function () {
-	
-		if (playerNameInput.value === null || playerNameInput.length === 0 || playerNameInput.value === '') {
-			playerNameStored.push(defaultName);
-			playerName.innerHTML = playerNameStored[0];
-
-			console.log(defaultName);
-		} else {
-			playerNameStored.push(playerNameInput.value);
-			playerName.innerHTML = playerNameStored[0];
-			playerNameInput.value = '';
-			console.log(playerNameStored);
-			console.log(defaultName);
-		}
-	
-	
+	if (playerNameInput.value === '' || playerNameInput.value.length === 0) {
+		playerNameStored.push('Player');
+		playerName.innerHTML = playerNameStored[0];
+	} else {
+		playerNameStored.push(playerNameInput.value);
+		playerName.innerHTML = playerNameStored[0];
+		document.querySelector('#players-name').innerText = `- ${playerNameStored[0]} -`;
+		playerNameInput.value = '';
+		console.log(playerNameStored);
+		
+	}
+	document.querySelector('#choose').play();
+	document.querySelector('#choose').currentTime = 0;
 });
 
 nextBtn.style.display = 'none';
@@ -51,18 +82,22 @@ nextBtn.onclick = function () {
 		showAnswer(questionCounter);
 		console.log(questionCounter);
 		nextBtn.style.display = 'none';
-		timeLeft = 15;
-		timer.innerText = `${timeLeft}`;
+		timer.innerText = timeLeft;
+		timeLeft = 21;
 		gameInterval = setInterval(countdown, 1000);
 	} else {
 		clearInterval(gameInterval);
-		timeLeft = 0;
+		//playerTimeStored[0] = 20;
 		nextBtn.classList.add('disabled');
 		console.log('COMPLETED');
 		questionSection.classList.remove('show');
 		resultContainer.classList.add('show');
-	    playerName.innerHTML = playerNameStored[0];
+		playerName.innerHTML = playerNameStored[0];
+		document.querySelector('#congratulation').play();
+		document.querySelector('#congratulation').currentTime = 0;
 	}
+	document.querySelector('#choose').play();
+	document.querySelector('#choose').currentTime = 0;
 };
 
 startBtn.onclick = function () {
@@ -71,6 +106,8 @@ startBtn.onclick = function () {
 	categoryRules.classList.remove('show');
 	questionSection.classList.add('show');
 
+	document.querySelector('#choose').play();
+	document.querySelector('#choose').currentTime = 0;
 	//console.log("Array length",questionArray.length);
 };
 
@@ -80,7 +117,10 @@ function countdown() {
 		let options = document.querySelectorAll('#option-container .option');
 		nextBtn.style.display = 'block';
 		for (let i = 0; i < options.length; i++) {
-			if (options[i].textContent === questionArray[questionCounter].answer) {
+			if (
+				options[i].textContent.toUpperCase() ===
+				questionArray[questionCounter].answer.toUpperCase()
+			) {
 				options[i].classList.add('correct');
 				options[i].insertAdjacentHTML('beforeend', correctIcon);
 				// console.log(options[i].textContent);
@@ -90,16 +130,21 @@ function countdown() {
 			options[i].classList.add('disabled');
 		}
 		clearInterval(gameInterval);
+		document.querySelector('#timesUp').play();
+		document.querySelector('#timesUp').currentTime = 0;
 	} else {
 		timeLeft--;
 		// line.style.width = `${timeLeft}%`;
 
-		timer.innerText = `${timeLeft}`;
+		timer.innerText = timeLeft;
 	}
 	if (timeLeft < 10) {
-		timer.innerText = `0${timeLeft}`;
+		timer.innerText = '0' + timeLeft;
 	}
 	//console.log(123);
+
+	categoryQuestionLength.innerText = questionArray.length;
+	playerName.innerHTML = 'Player';
 }
 
 function showAnswer(index) {
@@ -132,8 +177,8 @@ function showAnswer(index) {
 
 //check the answer
 function selectedOption(answer) {
-	let userAnswer = answer.textContent;
-	let questionAnswer = questionArray[questionCounter].answer;
+	let userAnswer = answer.textContent.toUpperCase();
+	let questionAnswer = questionArray[questionCounter].answer.toUpperCase();
 	let options = document.querySelectorAll('#option-container .option');
 
 	if (userAnswer === questionAnswer) {
@@ -143,6 +188,8 @@ function selectedOption(answer) {
 		score++;
 		showScore(score);
 		//console.log('score:', score);
+		document.querySelector('#check').play();
+		document.querySelector('#check').currentTime = 0;
 	} else {
 		answer.classList.add('wrong');
 		console.log('INCORRECT');
@@ -150,13 +197,18 @@ function selectedOption(answer) {
 
 		//if the user clicks the wrong answer then it automatically choose the answer
 		for (let i = 0; i < options.length; i++) {
-			if (options[i].textContent === questionArray[questionCounter].answer) {
+			if (
+				options[i].textContent.toUpperCase() ===
+				questionArray[questionCounter].answer.toUpperCase()
+			) {
 				options[i].insertAdjacentHTML('beforeend', correctIcon);
 				options[i].classList.add('correct');
 				// console.log(options[i].textContent);
 			}
 		}
 		categoryQuestionLength.innerText = questionArray.length;
+		document.querySelector('#wrong').play();
+		document.querySelector('#wrong').currentTime = 0;
 	}
 	nextBtn.style.display = 'block';
 	//clear the time when the user chose answer
@@ -179,6 +231,7 @@ function showScore(totalScore) {
 
 	playerScore.innerText = totalScore;
 	categoryQuestionLength.innerText = questionArray.length;
+	playerName.innerHTML = 'Player';
 }
 
 //when the player wants to play again and reset all the elements
@@ -195,11 +248,12 @@ playAgainBtn.addEventListener('click', () => {
 	playerScore.innerText = 0;
 	currentQuestionNumber.innerText = 0;
 	questionLength.innerText = 0;
-	timeLeft = 15;
-	timer.innerText = 15;
+	timeLeft = 20;
+	timer.innerText = timeLeft;
 	questionCounter = 0;
-	playerNameStored = [];
-	playerName.innerHTML = `${defaultName}`;
+	//playerNameStored = [];
+	//playerTimeStored.length = 0;
+	playerName.innerHTML = 'Player';
 	resultContainer.classList.remove('show');
 	categoryContainer.classList.add('show');
 	//gameInterval = setInterval(countdown, 1000)
@@ -211,6 +265,8 @@ playAgainBtn.addEventListener('click', () => {
 	nextBtn.classList.remove('disabled');
 	console.log('Array length', questionArray.length);
 	hideMessage.style.display = 'none';
+	document.querySelector('#choose').play();
+	document.querySelector('#choose').currentTime = 0;
 });
 
 //function to navigate different divisions
@@ -237,15 +293,55 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function loadInterval() {
 	if (progressBarTime >= 100) {
-		clearInterval(progressBarInterval);
 		frontCover.style.display = ' none';
-		//
 		categoryContainer.classList.add('show');
+		document.querySelector('#playing').play();
+		document.querySelector('#playing').currentTime = 0;
+		document.querySelector('#playing').volume = 0.5;
+		clearInterval(progressBarInterval);
 	} else {
 		progressBarTime++;
 
 		progressBar.style.width = `${progressBarTime}%`;
 		document.querySelector('.loading').innerText = `${progressBarTime}%`;
+		// document.querySelector('#playing').pause();
+		// document.querySelector('#playing').currentTime = 0;
 	}
 }
 
+document.querySelector('#quit-btn').onclick = function () {
+	window.location.reload();
+	document.querySelector('#choose').play();
+	document.querySelector('#choose').currentTime = 0;
+	document.querySelector('#playing').pause();
+	document.querySelector('#playing').currentTime = 0;
+};
+
+//this is for the images when selecting
+
+let images = document.querySelectorAll('.avatar-container img');
+
+images.forEach(img => {
+	img.addEventListener('click', function () {
+		document.querySelector('#user-avatar').src = img.src;
+	})
+})
+
+//toggle btn to hide / show the avatar container
+
+document.querySelector('#avatar-btn').onclick = function () {
+	let imgContainer = document.querySelector('.avatar-container')
+
+	imgContainer.classList.toggle('show')
+}
+
+//for opening the navigation to 100%
+
+document.querySelector('#openNav').onclick = function () {
+	document.querySelector('.nav-container').style.width = '350px';
+}
+
+//for closing the navigation bar to 0%
+document.querySelector('#closeNav').onclick = function () {
+	document.querySelector('.nav-container').style.width = 0 + 'px';
+}
